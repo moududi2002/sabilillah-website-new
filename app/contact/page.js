@@ -6,6 +6,7 @@ import { Mail, Phone, MapPin, Facebook, Linkedin, Youtube, Send } from 'lucide-r
 
 export default function ContactPage() {
   const [language, setLanguage] = useState('en')
+  const [mounted, setMounted] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,8 +15,17 @@ export default function ContactPage() {
   })
 
   useEffect(() => {
+    setMounted(true)
     const savedLang = localStorage.getItem('language') || 'en'
     setLanguage(savedLang)
+
+    const handleLanguageChange = () => {
+      const newLang = localStorage.getItem('language') || 'en'
+      setLanguage(newLang)
+    }
+
+    window.addEventListener('languageChange', handleLanguageChange)
+    return () => window.removeEventListener('languageChange', handleLanguageChange)
   }, [])
 
   const content = {
@@ -33,7 +43,9 @@ export default function ContactPage() {
         message: 'Your Message',
         submit: 'Send Message'
       },
-      map: 'Our Location'
+      map: 'Our Location',
+      success: 'Message sent successfully!',
+      sending: 'Sending...'
     },
     bn: {
       title: 'যোগাযোগ করুন',
@@ -49,7 +61,9 @@ export default function ContactPage() {
         message: 'আপনার বার্তা',
         submit: 'বার্তা পাঠান'
       },
-      map: 'আমাদের অবস্থান'
+      map: 'আমাদের অবস্থান',
+      success: 'বার্তা সফলভাবে পাঠানো হয়েছে!',
+      sending: 'পাঠানো হচ্ছে...'
     }
   }
 
@@ -62,10 +76,16 @@ export default function ContactPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-    alert(language === 'en' ? 'Message sent successfully!' : 'বার্তা সফলভাবে পাঠানো হয়েছে!')
+    alert(content[language].success)
     setFormData({ name: '', email: '', phone: '', message: '' })
+  }
+
+  if (!mounted) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-emerald-600">Loading...</div>
+      </div>
+    )
   }
 
   return (
@@ -255,15 +275,8 @@ export default function ContactPage() {
                 <h3 className="text-xl font-bold text-gray-800 mb-4">
                   {content[language].map}
                 </h3>
-                <div className="h-64 bg-gray-200 rounded-lg overflow-hidden">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116833.831853638!2d89.539234!3d23.685789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ffb6b2b1b1b1b1%3A0x9b9b9b9b9b9b9b!2sRajbari%20District!5e0!3m2!1sen!2sbd!4v1620000000000!5m2!1sen!2sbd"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen=""
-                    loading="lazy"
-                  />
+                <div className="h-64 bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
+                  <p className="text-gray-500">Google Maps Integration</p>
                 </div>
               </div>
 
@@ -273,18 +286,18 @@ export default function ContactPage() {
                   {content[language].social}
                 </h3>
                 <div className="flex space-x-4 justify-center">
-                  <a href="#" className="bg-blue-600 p-3 rounded-full text-white hover:bg-blue-700 transition">
+                  <button className="bg-blue-600 p-3 rounded-full text-white hover:bg-blue-700 transition">
                     <Facebook size={20} />
-                  </a>
-                  <a href="#" className="bg-blue-700 p-3 rounded-full text-white hover:bg-blue-800 transition">
+                  </button>
+                  <button className="bg-blue-700 p-3 rounded-full text-white hover:bg-blue-800 transition">
                     <Linkedin size={20} />
-                  </a>
-                  <a href="#" className="bg-red-600 p-3 rounded-full text-white hover:bg-red-700 transition">
+                  </button>
+                  <button className="bg-red-600 p-3 rounded-full text-white hover:bg-red-700 transition">
                     <Youtube size={20} />
-                  </a>
-                  <a href="#" className="bg-green-600 p-3 rounded-full text-white hover:bg-green-700 transition">
+                  </button>
+                  <button className="bg-green-600 p-3 rounded-full text-white hover:bg-green-700 transition">
                     <Phone size={20} />
-                  </a>
+                  </button>
                 </div>
               </div>
             </motion.div>

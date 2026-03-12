@@ -2,14 +2,24 @@
 'use client'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import { Linkedin, Mail, Users } from 'lucide-react'
+import { Linkedin, Mail, Users, MapPin } from 'lucide-react'
 
 export default function TeamPage() {
   const [language, setLanguage] = useState('en')
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const savedLang = localStorage.getItem('language') || 'en'
     setLanguage(savedLang)
+
+    const handleLanguageChange = () => {
+      const newLang = localStorage.getItem('language') || 'en'
+      setLanguage(newLang)
+    }
+
+    window.addEventListener('languageChange', handleLanguageChange)
+    return () => window.removeEventListener('languageChange', handleLanguageChange)
   }, [])
 
   const content = {
@@ -17,70 +27,74 @@ export default function TeamPage() {
       title: 'Our Team',
       subtitle: 'Dedicated individuals working tirelessly for the community',
       management: 'Management Team',
-      advisory: 'Advisory Board',
       volunteers: 'Volunteers',
-      executive: 'Executive Committee'
+      joinTeam: 'Join Our Team',
+      joinText: 'Be a part of our mission to serve humanity. Volunteer with us and make a difference.',
+      joinButton: 'Become a Volunteer',
+      location: 'Location'
     },
     bn: {
       title: 'আমাদের টিম',
       subtitle: 'সম্প্রদায়ের জন্য নিরলসভাবে কাজ করা নিবেদিতপ্রাণ ব্যক্তিবর্গ',
       management: 'পরিচালনা টিম',
-      advisory: 'উপদেষ্টা কমিটি',
       volunteers: 'স্বেচ্ছাসেবক',
-      executive: 'কার্যনির্বাহী কমিটি'
+      joinTeam: 'আমাদের টিমে যোগ দিন',
+      joinText: 'মানবতার সেবায় আমাদের মিশনের অংশ হোন। আমাদের সাথে স্বেচ্ছাসেবক হিসেবে যোগ দিন এবং পরিবর্তন আনুন।',
+      joinButton: 'স্বেচ্ছাসেবক হোন',
+      location: 'অবস্থান'
     }
   }
 
   const managementTeam = [
     {
-      name: 'Anichur Rahman',
+      name: { en: 'Anichur Rahman', bn: 'আনিছুর রহমান' },
       role: { en: 'Chairman', bn: 'চেয়ারম্যান' },
-      unit: 'Board of Directors',
-      image: '/images/team/anichur.jpg',
+      unit: { en: 'Board of Directors', bn: 'পরিচালনা পর্ষদ' },
+      location: { en: 'Rajbari', bn: 'রাজবাড়ি' },
       bio: {
         en: 'Leading the foundation with vision and dedication since inception',
         bn: 'প্রতিষ্ঠালগ্ন থেকে দৃষ্টিভঙ্গি ও নিষ্ঠার সাথে ফাউন্ডেশনের নেতৃত্ব দিয়ে যাচ্ছেন'
       }
     },
     {
-      name: 'Nazmul Haque',
+      name: { en: 'Nazmul Haque', bn: 'নাজমুল হক' },
       role: { en: 'Chief of Finance', bn: 'অর্থ প্রধান' },
-      unit: 'Finance Unit',
-      image: '/images/team/nazmul.jpg',
+      unit: { en: 'Finance Unit', bn: 'অর্থ ইউনিট' },
+      location: { en: 'Rajbari', bn: 'রাজবাড়ি' },
       bio: {
         en: 'Ensuring transparent and effective utilization of funds',
         bn: 'তহবিলের স্বচ্ছ ও কার্যকর ব্যবহার নিশ্চিত করছেন'
       }
     },
     {
-      name: 'Airin Afroj Aishi',
+      name: { en: 'Airin Afroj Aishi', bn: 'আয়রিন আফরোজ ঐশি' },
       role: { en: 'Deputy Director', bn: 'উপ-পরিচালক' },
-      unit: 'Director Unit',
-      image: '/images/team/airin.jpg',
+      unit: { en: 'Director Unit', bn: 'ডিরেক্টর ইউনিট' },
+      location: { en: 'Rajbari', bn: 'রাজবাড়ি' },
       bio: {
         en: 'Coordinating programs and overseeing operations',
         bn: 'প্রকল্প সমন্বয় ও কার্যক্রম তদারকি করছেন'
       }
     },
     {
-      name: 'Abul Ala Mowdudi',
+      name: { en: 'Abul Ala Moududi', bn: 'আবুল আলা মওদূদী' },
       role: { en: 'Operational Director', bn: 'অপারেশনাল ডিরেক্টর' },
-      unit: 'Operational Unit',
-      image: '/images/team/mowdudi.jpg',
+      unit: { en: 'Operational Unit', bn: 'অপারেশনাল ইউনিট' },
+      location: { en: 'Rajbari', bn: 'রাজবাড়ি' },
       bio: {
         en: 'Managing day-to-day operations and field activities',
         bn: 'দৈনন্দিন কার্যক্রম ও মাঠ পর্যায়ের কাজ পরিচালনা করছেন'
       }
     },
-    {
-      name: 'Razaul Karim',
-      role: { en: 'Assistant Operational Director', bn: 'সহকারী অপারেশনাল ডিরেক্টর' },
-      unit: 'Operational Unit',
-      image: '/images/team/razaul.jpg',
-      bio: {
-        en: 'Supporting operational activities and volunteer coordination',
-        bn: 'অপারেশনাল কার্যক্রম ও স্বেচ্ছাসেবক সমন্বয়ে সহায়তা করছেন'
-      }
+   {
+  name: { en: 'Razaul Karim', bn: 'রেজাউল করিম' },
+  role: { en: 'Assistant Operational Director', bn: 'সহকারী অপারেশনাল ডিরেক্টর' },
+  unit: { en: 'Operational Unit', bn: 'অপারেশনাল ইউনিট' },
+  location: { en: 'Rajbari', bn: 'রাজবাড়ি' },
+  bio: {
+    en: 'Supporting operational activities and volunteer coordination',
+    bn: 'অপারেশনাল কার্যক্রম ও স্বেচ্ছাসেবক সমন্বয়ে সহায়তা করছেন'
+     }
     }
   ]
 
@@ -91,6 +105,14 @@ export default function TeamPage() {
     { name: 'Hridoy Mondol', role: { en: 'Volunteer', bn: 'স্বেচ্ছাসেবক' }, area: 'Rajbari' },
     { name: 'Maruf Hasan', role: { en: 'Volunteer', bn: 'স্বেচ্ছাসেবক' }, area: 'Rajbari' }
   ]
+
+  if (!mounted) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-emerald-600">Loading...</div>
+      </div>
+    )
+  }
 
   return (
     <div className="pt-20">
@@ -122,67 +144,78 @@ export default function TeamPage() {
       </section>
 
       {/* Management Team */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-bold text-emerald-800 mb-4">
-              {content[language].management}
-            </h2>
-          </motion.div>
+<section className="py-16 bg-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="text-center mb-12"
+    >
+      <h2 className="text-3xl font-bold text-emerald-800 mb-4">
+        {content[language].management}
+      </h2>
+    </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {managementTeam.map((member, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition"
-              >
-                <div className="relative h-72 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/70 to-transparent z-10" />
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                  />
-                  <div className="absolute bottom-4 left-4 z-20">
-                    <p className="text-emerald-200 text-sm font-semibold">
-                      {member.unit}
-                    </p>
-                    <h3 className="text-white text-xl font-bold">
-                      {member.name}
-                    </h3>
-                  </div>
-                </div>
-                
-                <div className="p-6">
-                  <p className="text-emerald-600 font-semibold mb-2">
-                    {member.role[language]}
-                  </p>
-                  <p className="text-gray-600 text-sm mb-4">
-                    {member.bio[language]}
-                  </p>
-                  <div className="flex space-x-3">
-                    <a href="#" className="text-gray-400 hover:text-emerald-600 transition">
-                      <Mail size={18} />
-                    </a>
-                    <a href="#" className="text-gray-400 hover:text-emerald-600 transition">
-                      <Linkedin size={18} />
-                    </a>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {managementTeam.map((member, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+          className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition border border-gray-100"
+        >
+          <div className="relative h-48 bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center">
+            <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+              <Users className="w-12 h-12 text-white" />
+            </div>
           </div>
-        </div>
-      </section>
+
+          <div className="p-6">
+
+            {/* unit */}
+            <p className="text-emerald-600 text-sm font-semibold mb-1">
+              {member.unit[language]}
+            </p>
+
+            {/* name */}
+            <h3 className="text-xl font-bold text-gray-800 mb-1">
+              {member.name[language]}
+            </h3>
+
+            {/* role */}
+            <p className="text-gray-600 mb-2">
+              {member.role[language]}
+            </p>
+
+            {/* location */}
+            <div className="flex items-center text-sm text-gray-500 mb-4">
+              <MapPin size={14} className="mr-1" />
+              <span>{member.location[language]}</span>
+            </div>
+
+            {/* bio */}
+            <p className="text-gray-600 text-sm mb-4">
+              {member.bio[language]}
+            </p>
+
+            <div className="flex space-x-3">
+              <button className="text-gray-400 hover:text-emerald-600 transition">
+                <Mail size={18} />
+              </button>
+              <button className="text-gray-400 hover:text-emerald-600 transition">
+                <Linkedin size={18} />
+              </button>
+            </div>
+
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Volunteers Section */}
       <section className="py-16 bg-emerald-50">
@@ -196,11 +229,6 @@ export default function TeamPage() {
             <h2 className="text-3xl font-bold text-emerald-800 mb-4">
               {content[language].volunteers}
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              {language === 'en' 
-                ? 'The backbone of our organization, selflessly serving the community'
-                : 'আমাদের সংগঠনের প্রাণশক্তি, নিঃস্বার্থভাবে সম্প্রদায়ের সেবা করে যাচ্ছেন'}
-            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -219,7 +247,7 @@ export default function TeamPage() {
                 <div>
                   <h3 className="font-bold text-gray-800">{volunteer.name}</h3>
                   <p className="text-emerald-600 text-sm">{volunteer.role[language]}</p>
-                  <p className="text-gray-500 text-xs">{volunteer.area}</p>
+                  <p className="text-gray-500 text-xs">{content[language].location}: {volunteer.area}</p>
                 </div>
               </motion.div>
             ))}
@@ -237,15 +265,13 @@ export default function TeamPage() {
             className="bg-gradient-to-r from-emerald-600 to-emerald-700 rounded-3xl p-12 text-white"
           >
             <h2 className="text-3xl font-bold mb-4">
-              {language === 'en' ? 'Join Our Team' : 'আমাদের টিমে যোগ দিন'}
+              {content[language].joinTeam}
             </h2>
             <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
-              {language === 'en'
-                ? 'Be a part of our mission to serve humanity. Volunteer with us and make a difference.'
-                : 'মানবতার সেবায় আমাদের মিশনের অংশ হোন। আমাদের সাথে স্বেচ্ছাসেবক হিসেবে যোগ দিন এবং পরিবর্তন আনুন।'}
+              {content[language].joinText}
             </p>
             <button className="bg-white text-emerald-700 px-8 py-3 rounded-full font-semibold hover:bg-emerald-50 transition">
-              {language === 'en' ? 'Become a Volunteer' : 'স্বেচ্ছাসেবক হোন'}
+              {content[language].joinButton}
             </button>
           </motion.div>
         </div>

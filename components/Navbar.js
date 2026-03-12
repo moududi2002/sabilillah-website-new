@@ -9,6 +9,13 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [language, setLanguage] = useState('en')
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    const savedLang = localStorage.getItem('language') || 'en'
+    setLanguage(savedLang)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,7 +29,23 @@ export default function Navbar() {
     const newLang = language === 'en' ? 'bn' : 'en'
     setLanguage(newLang)
     localStorage.setItem('language', newLang)
-    window.location.reload()
+    // Force re-render of all components by dispatching a custom event
+    window.dispatchEvent(new Event('languageChange'))
+  }
+
+  // Listen for language changes from other components
+  useEffect(() => {
+    const handleLanguageChange = () => {
+      const savedLang = localStorage.getItem('language') || 'en'
+      setLanguage(savedLang)
+    }
+    
+    window.addEventListener('languageChange', handleLanguageChange)
+    return () => window.removeEventListener('languageChange', handleLanguageChange)
+  }, [])
+
+  if (!mounted) {
+    return null // বা একটা skeleton loader দেখাতে পারেন
   }
 
   const navItems = [
@@ -38,8 +61,18 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">
-            <img src="/logo.png" alt="Sabilillah Foundation" className="h-12 w-12 rounded-full" />
-            <span className="font-bold text-xl text-emerald-800">Sabilillah</span>
+           {/* Logo */}
+                <div className="w-10 h-10 bg-transparent rounded-full flex items-center justify-center overflow-hidden">
+                  <img
+                    src="/images/Sabilillah Foundation Logo.svg"
+                    alt="Sabilillah Foundation Logo"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+            {/* Organization Name */}
+                <span className="font-bold text-xl">
+                  {language === 'bn' ? 'সাবিলিল্লাহ ফাউন্ডেশন' : 'Sabilillah Foundation'}
+                </span>
           </Link>
 
           {/* Desktop Menu */}

@@ -3,14 +3,24 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { Target, Eye, Heart, Award, Clock, Users } from 'lucide-react'
-import Image from 'next/image'
+import Link from 'next/link'
 
 export default function AboutPage() {
   const [language, setLanguage] = useState('en')
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const savedLang = localStorage.getItem('language') || 'en'
     setLanguage(savedLang)
+
+    const handleLanguageChange = () => {
+      const newLang = localStorage.getItem('language') || 'en'
+      setLanguage(newLang)
+    }
+
+    window.addEventListener('languageChange', handleLanguageChange)
+    return () => window.removeEventListener('languageChange', handleLanguageChange)
   }, [])
 
   const content = {
@@ -35,7 +45,9 @@ export default function AboutPage() {
         { label: 'Volunteers', value: '50+' },
         { label: 'Projects Completed', value: '50+' },
         { label: 'Lives Impacted', value: '10,000+' }
-      ]
+      ],
+      readMore: 'Read More',
+      ourTeam: 'Meet Our Team'
     },
     bn: {
       title: 'সাবিলিল্লাহ ফাউন্ডেশন সম্পর্কে',
@@ -58,8 +70,18 @@ export default function AboutPage() {
         { label: 'স্বেচ্ছাসেবক', value: '৫০+' },
         { label: 'সম্পন্ন প্রকল্প', value: '৫০+' },
         { label: 'সহায়তা প্রাপ্ত', value: '১০,০০০+' }
-      ]
+      ],
+      readMore: 'আরও পড়ুন',
+      ourTeam: 'আমাদের টিম দেখুন'
     }
+  }
+
+  if (!mounted) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-emerald-600">Loading...</div>
+      </div>
+    )
   }
 
   return (
@@ -170,6 +192,12 @@ export default function AboutPage() {
               <p className="text-gray-600 leading-relaxed text-lg">
                 {content[language].historyText}
               </p>
+              <Link
+                href="/team"
+                className="inline-block mt-6 bg-emerald-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-emerald-700 transition"
+              >
+                {content[language].ourTeam}
+              </Link>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -177,11 +205,9 @@ export default function AboutPage() {
               viewport={{ once: true }}
               className="relative h-96 rounded-2xl overflow-hidden shadow-2xl"
             >
-              <img
-                src="/images/about-history.jpg"
-                alt="History"
-                className="w-full h-full object-cover"
-              />
+              <div className="w-full h-full bg-emerald-200 flex items-center justify-center">
+                <span className="text-emerald-700">Image Placeholder</span>
+              </div>
             </motion.div>
           </div>
         </div>

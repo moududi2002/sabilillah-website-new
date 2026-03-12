@@ -12,11 +12,26 @@ import DonationCTA from '../components/HomePage/DonationCTA'
 
 export default function Home() {
   const [language, setLanguage] = useState('en')
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const savedLang = localStorage.getItem('language') || 'en'
     setLanguage(savedLang)
+
+    // Listen for language changes
+    const handleLanguageChange = () => {
+      const newLang = localStorage.getItem('language') || 'en'
+      setLanguage(newLang)
+    }
+
+    window.addEventListener('languageChange', handleLanguageChange)
+    return () => window.removeEventListener('languageChange', handleLanguageChange)
   }, [])
+
+  if (!mounted) {
+    return null
+  }
 
   return (
     <div className="overflow-hidden">
