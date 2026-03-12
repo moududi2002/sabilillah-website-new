@@ -30,39 +30,37 @@ export default function EidTarget({ language }) {
 
   return (
     <section className="py-12 bg-gradient-to-r from-emerald-600 to-teal-600">
-
-      {/* Eid Food Package 2026 Header */}
-<motion.div
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  className="text-center mb-8"
->
-  {/* EID Badge */}
-  <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-semibold mb-3">
-    <Gift className="w-4 h-4" />
-    <span>{language === 'en' ? 'Special Initiative' : 'বিশেষ উদ্যোগ'}</span>
-  </div>
-
-  {/* Main Title */}
-  <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
-    {language === 'en' ? 'EID FOOD PACKAGE' : 'ঈদ ফুড প্যাকেজ'}
-    <span className="block text-2xl md:text-3xl text-emerald-200 mt-1">
-      2026
-    </span>
-  </h2>
-
-  {/* Subtitle */}
-  <p className="text-white/90 text-lg max-w-2xl mx-auto">
-    {language === 'en' 
-      ? 'Spread joy this Eid with your generous support' 
-      : 'আপনার উদার সহায়তায় ঈদের আনন্দ ছড়িয়ে দিন'}
-  </p>
-</motion.div>
-
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
+        {/* Eid Food Package 2026 Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-8"
+        >
+          {/* EID Badge */}
+          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-semibold mb-3">
+            <Gift className="w-4 h-4" />
+            <span>{language === 'en' ? 'Special Initiative' : 'বিশেষ উদ্যোগ'}</span>
+          </div>
+
+          {/* Main Title */}
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
+            {language === 'en' ? 'EID FOOD PACKAGE' : 'ঈদ ফুড প্যাকেজ'}
+            <span className="block text-2xl md:text-3xl text-emerald-200 mt-1">
+             {language === 'en' ? '2026' : '২০২৬'}
+            </span>
+          </h2>
+
+          {/* Subtitle */}
+          <p className="text-white/90 text-lg max-w-2xl mx-auto">
+            {language === 'en' 
+              ? 'Spread joy this Eid with your generous support' 
+              : 'আপনার উদার সহায়তায় ঈদের আনন্দ ছড়িয়ে দিন'}
+          </p>
+        </motion.div>
+
         {/* Main Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -105,17 +103,15 @@ export default function EidTarget({ language }) {
                   </div>
                 </div>
 
-               {/* Number */}
-                  <div className="flex items-center justify-center gap-1">
-                    <span className="text-4xl font-bold text-emerald-600">
-                      {language === 'bn' ? (150).toLocaleString('bn-BD') : 150}
-                    </span>
-
-                    <span className="text-4xl font-bold text-emerald-600">
-                      {language === 'en' ? 'Families' : 'পরিবার'}
-                    </span>
-                  </div>
-
+                {/* Number */}
+                <div className="flex items-center justify-center gap-1">
+                  <span className="text-4xl font-bold text-emerald-600">
+                    {language === 'bn' ? (150).toLocaleString('bn-BD') : 150}
+                  </span>
+                  <span className="text-4xl font-bold text-emerald-600">
+                    {language === 'en' ? 'Families' : 'পরিবার'}
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -147,17 +143,32 @@ export default function EidTarget({ language }) {
                 ))}
               </div>
 
-              {/* CTA Button */}
-             <Link href="/eid2026" className="flex justify-center">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full lg:w-auto px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
-                >
-                  <Heart className="w-4 h-4" />
-                  <span>{currentLang.cta}</span>
-                </motion.button>
-              </Link>
+              {/* Buttons Container */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                {/* Learn More Button - Corrected Link */}
+                <Link href="/ramadan-pakage" className="flex-1">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg font-medium hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
+                  >
+                    <Heart className="w-4 h-4" />
+                    <span>{language === 'en' ? 'Learn More' : 'আরও জানুন'}</span>
+                  </motion.button>
+                </Link>
+
+                {/* CTA Button */}
+                <Link href="/donate" className="flex-1">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg font-medium hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
+                  >
+                    <Heart className="w-4 h-4" />
+                    <span>{currentLang.cta}</span>
+                  </motion.button>
+                </Link>
+              </div>
             </div>
           </div>
         </motion.div>

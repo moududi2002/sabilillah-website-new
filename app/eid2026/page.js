@@ -3,10 +3,10 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Gift, Shield, Copy, CheckCircle, AlertCircle, ArrowLeft, Home } from 'lucide-react'
+import { Gift, Shield, Copy, CheckCircle, AlertCircle, ArrowLeft, Home, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
+import Image from "next/image"
 import Navbar from '/components/Navbar'
-
 
 export default function DonatePage() {
   const [language, setLanguage] = useState('en')
@@ -14,6 +14,7 @@ export default function DonatePage() {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
+    countryCode: '+880',
     amount: '',
     customAmount: '',
     paymentMethod: '',
@@ -22,7 +23,17 @@ export default function DonatePage() {
 
   const [showSuccess, setShowSuccess] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [copiedField, setCopiedField] = useState('')
   const [errors, setErrors] = useState({})
+
+  const countryCodes = [
+    { code: '+880', country: 'Bangladesh', flag: '🇧🇩' },
+    { code: '+1', country: 'USA', flag: '🇺🇸' },
+    { code: '+44', country: 'UK', flag: '🇬🇧' },
+    { code: '+966', country: 'Saudi Arabia', flag: '🇸🇦' },
+    { code: '+971', country: 'UAE', flag: '🇦🇪' },
+    { code: '+91', country: 'India', flag: '🇮🇳' },
+  ]
 
   useEffect(() => {
     setMounted(true)
@@ -39,33 +50,67 @@ export default function DonatePage() {
   }, [])
 
   const paymentMethods = [
-    { id: 'bkash', name: 'bKash', bnName: 'বিকাশ', icon: '💳' },
-    { id: 'nagad', name: 'Nagad', bnName: 'নগদ', icon: '📱' },
-    { id: 'rocket', name: 'Rocket', bnName: 'রকেট', icon: '🚀' },
-    { id: 'bankBD', name: 'Bank (BD)', bnName: 'ব্যাংক (বাংলাদেশ)', icon: '🏦' },
-    { id: 'bankUSA', name: 'Bank (USA)', bnName: 'ব্যাংক (ইউএসএ)', icon: '🏛️' }
+    { id: 'bkash', name: 'bKash', bnName: 'বিকাশ', icon: '/images/icon/bkash.png'},
+    { id: 'nagad', name: 'Nagad', bnName: 'নগদ', icon: '/images/icon/nagad.png' },
+    { id: 'rocket', name: 'Rocket', bnName: 'রকেট', icon: '/images/icon/rocket.png' },
+    { id: 'bankBD', name: 'Bank (BD)', bnName: 'ব্যাংক (বাংলাদেশ)', icon: '/images/icon/ibbl.png' },
+    { id: 'bankUSA', name: 'Bank (USA)', bnName: 'ব্যাংক (ইউএসএ)', icon: '/images/icon/us b.png' }
   ]
 
   const paymentDetails = {
     bkash: {
-      en: 'bKash Merchant: 017XXXXXXXX (Personal)',
-      bn: 'বিকাশ মার্চেন্ট: ০১৭XXXXXXXX (পার্সোনাল)'
+      en: '01910649179',
+      bn: '০১৯১০৬৪৯১৭৯',
+      fullEn: 'bKash Merchant: 01910649179 (Personal) • BKash Name: ANICHUR RAHMAN',
+      fullBn: 'বিকাশ মার্চেন্ট: ০১৯১০৬৪৯১৭৯ (পার্সোনাল) • বিকাশ নাম: ANICHUR RAHMAN'
     },
     nagad: {
-      en: 'Nagad: 017XXXXXXXX (Personal)',
-      bn: 'নগদ: ০১৭XXXXXXXX (পার্সোনাল)'
+      en: '01910649179',
+      bn: '০১৯১০৬৪৯১৭৯',
+      fullEn: 'Nagad: 01910649179 (Personal) • Nagad Name: ANICHUR RAHMAN',
+      fullBn: 'নগদ: ০১৯১০৬৪৯১৭৯ (পার্সোনাল) • নগদ নাম: ANICHUR RAHMAN'
     },
     rocket: {
-      en: 'Rocket: 017XXXXXXXX (Personal)',
-      bn: 'রকেট: ০১৭XXXXXXXX (পার্সোনাল)'
+      en: '017246530540',
+      bn: '০১৭২৪৬৫৩০৫৪০',
+      fullEn: 'Rocket: 017246530540 (Personal) • Acc. Name: Anichur Rahman',
+      fullBn: 'রকেট: ০১৭২৪৬৫৩০৫৪০ (পার্সোনাল) • অ্যাকাউন্ট নাম: Anichur Rahman'
     },
     bankBD: {
-      en: 'Dutch Bangla Bank, A/C: 123-456-789, Routing: 123456789',
-      bn: 'ডাচ-বাংলা ব্যাংক, অ্যাকাউন্ট: ১২৩-৪৫৬-৭৮৯, রাউটিং: ১২৩৪৫৬৭৮৯'
+      en: {
+        bank: 'Islami Bank Bangladesh PLC',
+        branch: 'Baliakandi Sub-Branch, Rajbari',
+        account: '20507550200168001',
+        routing: '125820736',
+        swift: 'IBBLBDDH',
+        full: 'Islami Bank Bangladesh PLC, A/C No.: 20507550200168001, Routing: 125820736, Swift: IBBLBDDH'
+      },
+      bn: {
+        bank: 'ইসলামী ব্যাংক বাংলাদেশ পিএলসি',
+        branch: 'বালিয়াকান্দি সাব-ব্রাঞ্চ, রাজবাড়ী',
+        account: '20507550200168001',
+        routing: '125820736',
+        swift: 'IBBLBDDH',
+        full: 'ইসলামী ব্যাংক বাংলাদেশ পিএলসি, অ্যাকাউন্ট নং: 20507550200168001, রাউটিং: 125820736, সুইফট: IBBLBDDH'
+      }
     },
     bankUSA: {
-      en: 'Chase Bank, A/C: 123456789, Routing: 021000021, Swift: CHASUS33',
-      bn: 'চেজ ব্যাংক, অ্যাকাউন্ট: ১২৩৪৫৬৭৮৯, রাউটিং: ০২১০০০০২১, সুইফট: CHASUS33'
+      en: {
+        bank: 'Chase Bank',
+        branch: 'New York, USA',
+        account: '123456789',
+        routing: '021000021',
+        swift: 'CHASUS33',
+        full: 'Chase Bank, A/C: 123456789, Routing: 021000021, Swift: CHASUS33'
+      },
+      bn: {
+        bank: 'চেজ ব্যাংক',
+        branch: 'নিউ ইয়র্ক, ইউএসএ',
+        account: '123456789',
+        routing: '021000021',
+        swift: 'CHASUS33',
+        full: 'চেজ ব্যাংক, অ্যাকাউন্ট: 123456789, রাউটিং: 021000021, সুইফট: CHASUS33'
+      }
     }
   }
 
@@ -78,7 +123,8 @@ export default function DonatePage() {
       name: 'Full Name',
       namePlaceholder: 'Enter your full name',
       phone: 'Phone Number',
-      phonePlaceholder: '01XXXXXXXXX',
+      phonePlaceholder: 'Enter phone number',
+      countryCode: 'Country Code',
       amount: 'Donation Amount',
       customAmount: 'Custom Amount',
       selectAmount: 'Select or enter amount',
@@ -88,6 +134,11 @@ export default function DonatePage() {
       transactionPlaceholder: 'Enter transaction ID (TrxID)',
       accountDetails: 'Account Details',
       copy: 'Copy',
+      copyNumber: 'Copy Number',
+      copyAll: 'Copy All',
+      copyAccount: 'Copy Account No',
+      copyRouting: 'Copy Routing',
+      copySwift: 'Copy Swift',
       copied: 'Copied!',
       donate: 'Complete Donation',
       privacy: 'Your information is safe with us. We never share your data.',
@@ -97,7 +148,12 @@ export default function DonatePage() {
       minAmount: 'Minimum donation amount is 100 BDT',
       invalidPhone: 'Please enter a valid phone number',
       back: 'Back',
-      home: 'Home'
+      home: 'Home',
+      bankName: 'Bank Name',
+      branchName: 'Branch Name',
+      accountNo: 'Account Number',
+      routingNo: 'Routing Number',
+      swiftCode: 'Swift Code'
     },
     bn: {
       title: 'রমজান ফুড প্যাকেজ ২০২৬',
@@ -105,7 +161,8 @@ export default function DonatePage() {
       name: 'পূর্ণ নাম',
       namePlaceholder: 'আপনার পূর্ণ নাম লিখুন',
       phone: 'মোবাইল নম্বর',
-      phonePlaceholder: '০১XXXXXXXXX',
+      phonePlaceholder: 'ফোন নম্বর দিন',
+      countryCode: 'কান্ট্রি কোড',
       amount: 'দানের পরিমাণ',
       customAmount: 'নিজের পরিমাণ',
       selectAmount: 'পরিমাণ নির্বাচন করুন',
@@ -115,7 +172,12 @@ export default function DonatePage() {
       transactionPlaceholder: 'ট্রানজেকশন আইডি দিন (TrxID)',
       accountDetails: 'অ্যাকাউন্ট ডিটেইলস',
       copy: 'কপি',
-      copied: 'কপি হয়েছে!',
+      copyNumber: 'নম্বর কপি করুন',
+      copyAll: 'সব কপি করুন',
+      copyAccount: 'অ্যাকাউন্ট নং কপি',
+      copyRouting: 'রাউটিং কপি',
+      copySwift: 'সুইফট কপি',
+      copied: 'কপি হয়েছে!',
       donate: 'ডোনেশন সম্পন্ন করুন',
       privacy: 'আপনার তথ্য আমাদের কাছে নিরাপদ। আমরা কখনো আপনার তথ্য প্রকাশ করি না।',
       success: 'আপনার দানের জন্য ধন্যবাদ!',
@@ -124,7 +186,12 @@ export default function DonatePage() {
       minAmount: 'সর্বনিম্ন দান ১০০ টাকা',
       invalidPhone: 'সঠিক মোবাইল নম্বর দিন',
       back: 'পেছনে',
-      home: 'হোম'
+      home: 'হোম',
+      bankName: 'ব্যাংকের নাম',
+      branchName: 'শাখার নাম',
+      accountNo: 'অ্যাকাউন্ট নম্বর',
+      routingNo: 'রাউটিং নম্বর',
+      swiftCode: 'সুইফট কোড'
     }
   }
 
@@ -133,9 +200,10 @@ export default function DonatePage() {
   const validateForm = () => {
     const newErrors = {}
     const amount = formData.customAmount || formData.amount
+    const fullPhone = formData.countryCode + formData.phone
     
     if (!formData.name) newErrors.name = true
-    if (!formData.phone || !/^01[3-9]\d{8}$/.test(formData.phone)) {
+    if (!formData.phone || formData.phone.length < 10) {
       newErrors.phone = true
     }
     if (!amount || amount < 100) newErrors.amount = true
@@ -149,15 +217,116 @@ export default function DonatePage() {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (validateForm()) {
+      const fullPhone = formData.countryCode + formData.phone
+      console.log('Form submitted with full phone:', fullPhone)
       setShowSuccess(true)
       setTimeout(() => setShowSuccess(false), 3000)
     }
   }
 
-  const handleCopy = (text) => {
+  const handleCopy = (text, field) => {
     navigator.clipboard.writeText(text)
-    setCopied(true)
+    setCopied(field)
     setTimeout(() => setCopied(false), 2000)
+  }
+
+  const getDisplayText = (method) => {
+    if (['bkash', 'nagad', 'rocket'].includes(method)) {
+      return paymentDetails[method][`full${language === 'en' ? 'En' : 'Bn'}`]
+    } else {
+      return paymentDetails[method][language].full
+    }
+  }
+
+  const renderBankDetails = (method) => {
+    const details = paymentDetails[method][language]
+    
+    return (
+      <div className="space-y-3">
+        {/* Bank Name */}
+        <div className="flex items-center justify-between bg-white/50 p-2 rounded-lg">
+          <div>
+            <span className="text-xs text-gray-500 block">{currentLang.bankName}</span>
+            <span className="text-sm font-medium">{details.bank}</span>
+          </div>
+          
+        </div>
+
+        {/* Branch */}
+
+        <div className="flex items-center justify-between bg-white/50 p-2 rounded-lg">
+            <div>
+                <span className="text-xs text-gray-500 block">{currentLang.branchName}</span>   
+                <span className="text-sm font-medium">{details.branch}</span>   
+                </div>
+                
+        </div>
+
+
+        {/* Account Number */}
+        <div className="flex items-center justify-between bg-white/50 p-2 rounded-lg">
+          <div>
+            <span className="text-xs text-gray-500 block">{currentLang.accountNo}</span>
+            <span className="text-sm font-mono">{details.account}</span>
+          </div>
+          <button
+            onClick={() => handleCopy(details.account, 'account')}
+            className="p-2 hover:bg-emerald-100 rounded-lg transition-colors"
+            title={currentLang.copyAccount}
+          >
+            {copied === 'account' ? <CheckCircle size={16} className="text-emerald-600" /> : <Copy size={16} className="text-emerald-600" />}
+          </button>
+        </div>
+
+        {/* Routing Number */}
+        <div className="flex items-center justify-between bg-white/50 p-2 rounded-lg">
+          <div>
+            <span className="text-xs text-gray-500 block">{currentLang.routingNo}</span>
+            <span className="text-sm font-mono">{details.routing}</span>
+          </div>
+          <button
+            onClick={() => handleCopy(details.routing, 'routing')}
+            className="p-2 hover:bg-emerald-100 rounded-lg transition-colors"
+            title={currentLang.copyRouting}
+          >
+            {copied === 'routing' ? <CheckCircle size={16} className="text-emerald-600" /> : <Copy size={16} className="text-emerald-600" />}
+          </button>
+        </div>
+
+        {/* Swift Code */}
+        <div className="flex items-center justify-between bg-white/50 p-2 rounded-lg">
+          <div>
+            <span className="text-xs text-gray-500 block">{currentLang.swiftCode}</span>
+            <span className="text-sm font-mono">{details.swift}</span>
+          </div>
+          <button
+            onClick={() => handleCopy(details.swift, 'swift')}
+            className="p-2 hover:bg-emerald-100 rounded-lg transition-colors"
+            title={currentLang.copySwift}
+          >
+            {copied === 'swift' ? <CheckCircle size={16} className="text-emerald-600" /> : <Copy size={16} className="text-emerald-600" />}
+          </button>
+        </div>
+
+        {/* Copy All Button */}
+        <button
+          onClick={() => handleCopy(details.full, 'all')}
+          className="w-full mt-2 px-3 py-2 bg-emerald-100 text-emerald-700 rounded-lg text-sm font-medium hover:bg-emerald-200 transition-colors flex items-center justify-center gap-2"
+        >
+          {copied === 'all' ? (
+            <>
+              <CheckCircle size={14} />
+              <span>{currentLang.copied}</span>
+            </>
+          ) : (
+            <>
+              <Copy size={14} />
+              <span>{currentLang.copyAll}</span>
+            </>
+          )}
+        </button>
+      </div>
+    )
   }
 
   if (!mounted) {
@@ -245,20 +414,39 @@ export default function DonatePage() {
                 />
               </div>
 
-              {/* Phone Field */}
+              {/* Phone Field with Country Code */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   {currentLang.phone} <span className="text-red-500">*</span>
                 </label>
-                <input
-                  type="tel"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  placeholder={currentLang.phonePlaceholder}
-                  className={`w-full px-4 py-3 rounded-xl border ${
-                    errors.phone ? 'border-red-500' : 'border-gray-200'
-                  } focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition`}
-                />
+                <div className="flex gap-2">
+                  <div className="relative w-32">
+                    <select
+                      value={formData.countryCode}
+                      onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
+                      className="w-full px-3 py-3 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition appearance-none bg-white"
+                    >
+                      {countryCodes.map((country) => (
+                        <option key={country.code} value={country.code}>
+                          {country.flag} {country.code}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" size={16} />
+                  </div>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => {
+                      setFormData({...formData, phone: e.target.value})
+                      setErrors({...errors, phone: false})
+                    }}
+                    placeholder={currentLang.phonePlaceholder}
+                    className={`flex-1 px-4 py-3 rounded-xl border ${
+                      errors.phone ? 'border-red-500' : 'border-gray-200'
+                    } focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition`}
+                  />
+                </div>
                 {errors.phone && (
                   <p className="mt-1 text-xs text-red-500">{currentLang.invalidPhone}</p>
                 )}
@@ -270,7 +458,6 @@ export default function DonatePage() {
                   {currentLang.amount} <span className="text-red-500">*</span>
                 </label>
                 
-                {/* Preset Amounts */}
                 <div className="grid grid-cols-3 md:grid-cols-5 gap-3 mb-3">
                   {amountOptions.map((amount) => (
                     <button
@@ -291,7 +478,6 @@ export default function DonatePage() {
                   ))}
                 </div>
 
-                {/* Custom Amount */}
                 <input
                   type="number"
                   value={formData.customAmount}
@@ -309,7 +495,7 @@ export default function DonatePage() {
                 )}
               </div>
 
-              {/* Payment Method */}
+              {/* Payment Method Selection */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   {currentLang.paymentMethod} <span className="text-red-500">*</span>
@@ -324,50 +510,68 @@ export default function DonatePage() {
                         setFormData({...formData, paymentMethod: method.id})
                         setErrors({...errors, paymentMethod: false})
                       }}
-                      className={`px-4 py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${
+                      className={`px-2 py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${
                         formData.paymentMethod === method.id
                           ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
-                      <span>{method.icon}</span>
-                      <span>{language === 'en' ? method.name : method.bnName}</span>
+                      <div className="relative w-8 h-8 flex items-center justify-center shrink-0">
+                        {method.icon.startsWith('/') ? (
+                          <Image 
+                            src={method.icon} 
+                            alt={method.name} 
+                            width={32}
+                            height={32}
+                            className="object-contain"
+                          />
+                        ) : (
+                          <span className="text-xl leading-none">{method.icon}</span>
+                        )}
+                      </div>
+                      <span className="truncate text-sm">{language === 'en' ? method.name : method.bnName}</span>
                     </button>
                   ))}
                 </div>
 
-                {/* Payment Details */}
+                {/* Account Details Box */}
                 {formData.paymentMethod && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-emerald-50 p-4 rounded-xl mb-4"
+                    className="bg-emerald-50 p-4 rounded-xl mb-4 border border-emerald-100"
                   >
-                    <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center justify-between mb-3">
                       <span className="font-semibold text-gray-700">
                         {currentLang.accountDetails}:
                       </span>
-                      <button
-                        type="button"
-                        onClick={() => handleCopy(paymentDetails[formData.paymentMethod][language])}
-                        className="flex items-center gap-1 text-sm text-emerald-600 hover:text-emerald-700"
-                      >
-                        {copied ? (
-                          <>
-                            <CheckCircle size={14} />
-                            <span>{currentLang.copied}</span>
-                          </>
-                        ) : (
-                          <>
-                            <Copy size={14} />
-                            <span>{currentLang.copy}</span>
-                          </>
-                        )}
-                      </button>
                     </div>
-                    <p className="text-gray-600 font-mono text-sm">
-                      {paymentDetails[formData.paymentMethod][language]}
-                    </p>
+
+                    {['bkash', 'nagad', 'rocket'].includes(formData.paymentMethod) ? (
+                      <>
+                        <p className="text-gray-600 font-mono text-sm break-words leading-relaxed mb-3">
+                          {getDisplayText(formData.paymentMethod)}
+                        </p>
+                        <button
+                          onClick={() => handleCopy(paymentDetails[formData.paymentMethod][language], formData.paymentMethod)}
+                          className="w-full px-3 py-2 bg-emerald-100 text-emerald-700 rounded-lg text-sm font-medium hover:bg-emerald-200 transition-colors flex items-center justify-center gap-2"
+                        >
+                          {copied === formData.paymentMethod ? (
+                            <>
+                              <CheckCircle size={14} />
+                              <span>{currentLang.copied}</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy size={14} />
+                              <span>{currentLang.copyNumber}</span>
+                            </>
+                          )}
+                        </button>
+                      </>
+                    ) : (
+                      renderBankDetails(formData.paymentMethod)
+                    )}
                   </motion.div>
                 )}
               </div>
@@ -394,14 +598,14 @@ export default function DonatePage() {
               {/* Privacy Notice */}
               <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
                 <Shield className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 leading-snug">
                   {currentLang.privacy}
                 </p>
               </div>
 
               {/* Error Message */}
               {Object.keys(errors).length > 0 && (
-                <div className="flex items-center gap-2 text-red-500 text-sm">
+                <div className="flex items-center gap-2 text-red-500 text-sm font-medium">
                   <AlertCircle size={16} />
                   <span>{currentLang.error}</span>
                 </div>
@@ -410,7 +614,7 @@ export default function DonatePage() {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-4 rounded-xl font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-4 rounded-xl font-semibold text-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
               >
                 {currentLang.donate}
               </button>
@@ -421,13 +625,13 @@ export default function DonatePage() {
         {/* Success Popup */}
         <AnimatePresence>
           {showSuccess && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.5 }}
-              className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"
-            >
-              <div className="bg-white rounded-2xl shadow-2xl p-8 text-center max-w-sm mx-4">
+            <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/20 backdrop-blur-sm">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                className="bg-white rounded-2xl shadow-2xl p-8 text-center max-w-sm mx-4"
+              >
                 <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <CheckCircle className="w-10 h-10 text-emerald-600" />
                 </div>
@@ -437,29 +641,27 @@ export default function DonatePage() {
                 <p className="text-gray-600">
                   {currentLang.successMessage}
                 </p>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           )}
         </AnimatePresence>
 
-          {/* Back to Home Link */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-center mt-8"
-           >
-            <Link 
-              href="/" 
-              className="text-emerald-600 hover:text-emerald-700 font-medium inline-flex items-center gap-2"
-            >
-              <span>←</span>
-              <span>{language === 'en' ? 'Back to Home' : 'হোম পেজে ফিরে যান'}</span>
-            </Link>
-          </motion.div>
+        {/* Footer Link */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="text-center mt-8"
+        >
+          <Link 
+            href="/" 
+            className="text-emerald-600 hover:text-emerald-700 font-medium inline-flex items-center gap-2 transition-colors"
+          >
+            <span>←</span>
+            <span>{language === 'en' ? 'Back to Home' : 'হোম পেজে ফিরে যান'}</span>
+          </Link>
+        </motion.div>
       </main>
-
-    
     </>
   )
 }
