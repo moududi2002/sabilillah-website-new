@@ -1,143 +1,203 @@
 // components/HomePage/ManagementTeam.js
 'use client'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
-import { Linkedin, Mail } from 'lucide-react'
+import { Linkedin, Mail, Users } from 'lucide-react'
 
 export default function ManagementTeam({ language }) {
   const team = [
     {
-      name: 'Anichur Rahman',
+      name: { en: 'Anichur Rahman', bn: 'আনিছুর রহমান' },
       role: { en: 'Chairman', bn: 'চেয়ারম্যান' },
       image: '/images/team/anichur.jpg',
-      unit: 'Chairman'
+      social: {
+        email: 'anis.mbstu.cse@gmail.com',
+        linkedin: 'https://linkedin.com/in/anichur'
+      }
     },
     {
-      name: 'Nazmul Haque',
-      role: { en: 'Chief of Finance', bn: 'অর্থ প্রধান' },
+      name: { en: 'Nazmul Haque', bn: 'নাজমুল হক' },
+      role: { en: 'Finance Chief', bn: 'অর্থ বিভাগীয় প্রধান' },
       image: '/images/team/nazmul.jpg',
-      unit: 'Finance Unit'
+      social: {
+        email: 'nazmul@example.com',
+        linkedin: 'https://www.linkedin.com/in/eng-anichur-rahman'
+      }
     },
     {
-      name: 'Airin Afroj Aishi',
+      name: { en: 'Airin Afroj Aishi', bn: 'আইরিন আফরোজ  ঐশি' },
       role: { en: 'Deputy Director', bn: 'উপ-পরিচালক' },
       image: '/images/team/airin.jpg',
-      unit: 'Director Unit'
+      social: {
+        email: 'airinafroj93@gmail.com',
+        linkedin: 'https://linkedin.com/in/airin'
+      }
     },
     {
-      name: 'Abul Ala Mowdudi',
-      role: { en: 'Operational Director', bn: 'অপারেশনাল ডিরেক্টর' },
-      image: '/images/team/mowdudi.jpg',
-      unit: 'Operational Unit'
+      name: { en: 'Abul Ala Mowdudi', bn: 'আবুল আলা মওদূদী' },
+      role: { en: 'Operations Director', bn: 'নির্বাহী পরিচালক' },
+      image: '/images/team/moududi.jpeg',
+      social: {
+        email: 'moududi2002@gmail.com',
+        linkedin: 'https://www.linkedin.com/in/abul-ala-moududi'
+      }
     },
     {
-      name: 'Razaul Karim',
-      role: { en: 'Assistant Operational Director', bn: 'সহকারী অপারেশনাল ডিরেক্টর' },
+      name: { en: 'Razaul Karim', bn: 'রাজাউল করিম' },
+      role: { en: 'Asst. Operations Director', bn: 'সহকারী নির্বাহী পরিচালক' },
       image: '/images/team/razaul.jpg',
-      unit: 'Operational Unit'
+      social: {
+        email: 'razaulce15004@gmail.com',
+        linkedin: 'https://linkedin.com/in/razaul'
+      }
     }
   ]
 
   const volunteers = [
-    'Mahabubur Rahman (Meton)',
-    'Md. Mitun',
-    'Mehedi Hasan',
-    'Hridoy Mondol',
-    'Maruf Hasan'
+    { en: 'Mahabubur Rahman', bn: 'মহাবুবুর রহমান' },
+    { en: 'Md. Mitun', bn: 'মোঃ মিতুন' },
+    { en: 'Mehedi Hasan', bn: 'মেহেদী হাসান' },
+    { en: 'Hridoy Mondol', bn: 'হৃদয় মন্ডল' },
+    { en: 'Maruf Hasan', bn: 'মারুফ হাসান' }
   ]
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  }
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  }
+
   return (
-    <section className="py-20 bg-white">
+    <section className="py-16 bg-gradient-to-b from-white to-emerald-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold text-emerald-800 mb-4">
-            {language === 'en' ? 'Our Management Team' : 'আমাদের পরিচালনা টিম'}
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mb-4">
+            {language === 'en' ? 'Management Team' : 'পরিচালনা  কমিটি'}
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
             {language === 'en' 
-              ? 'Dedicated individuals working tirelessly for the community'
-              : 'সম্প্রদায়ের জন্য নিরলসভাবে কাজ করা নিবেদিতপ্রাণ ব্যক্তিবর্গ'}
+              ? 'Meet the visionaries shaping our community'
+              : 'যাদের দুর্বার নেতৃত্ব মানুষের মুখে হাসি ফুটায়'}
           </p>
         </motion.div>
 
-        {/* Leadership Team */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        {/* Team Grid */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-16"
+        >
           {team.map((member, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition"
+              variants={item}
+              whileHover={{ y: -5 }}
+              className="group"
             >
-              <div className="relative h-64 overflow-hidden">
-                <div className="absolute inset-0 bg-emerald-600/20 group-hover:bg-emerald-600/40 transition z-10" />
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                />
-              </div>
-              <div className="p-6">
-                <p className="text-sm text-emerald-600 font-semibold mb-1">
-                  {member.unit}
-                </p>
-                <h3 className="text-xl font-bold text-gray-800 mb-1">
-                  {member.name}
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  {member.role[language]}
-                </p>
-                <div className="flex space-x-3">
-                  <a href="#" className="text-gray-400 hover:text-emerald-600 transition">
-                    <Mail size={18} />
-                  </a>
-                  <a href="#" className="text-gray-400 hover:text-emerald-600 transition">
-                    <Linkedin size={18} />
-                  </a>
+              <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+                
+                {/* Profile Image - Circular */}
+                <div className="relative mb-4">
+                  <div className="w-32 h-32 mx-auto relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full animate-pulse group-hover:animate-none" />
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover rounded-full border-4 border-white shadow-lg relative z-10 group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                </div>
+
+                {/* Details */}
+                <div className="text-center">
+                  <h3 className="font-bold text-gray-800 text-lg mb-1">
+                    {member.name[language]}
+                  </h3>
+                  <p className="text-emerald-600 font-medium text-sm mb-3">
+                    {member.role[language]}
+                  </p>
+                  
+                  {/* Social Links */}
+                  <div className="flex justify-center space-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <a 
+                      href={`mailto:${member.social.email}`}
+                      className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 hover:bg-emerald-600 hover:text-white transition-colors"
+                    >
+                      <Mail size={14} />
+                    </a>
+                    <a 
+                      href={member.social.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 hover:bg-emerald-600 hover:text-white transition-colors"
+                    >
+                      <Linkedin size={14} />
+                    </a>
+                  </div>
                 </div>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Volunteers Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-emerald-50 rounded-3xl p-8"
+          className="relative"
         >
-          <h3 className="text-2xl font-bold text-emerald-800 mb-6 text-center">
-            {language === 'en' ? 'Our Volunteers' : 'আমাদের স্বেচ্ছাসেবকগণ'}
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {volunteers.map((volunteer, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="bg-white rounded-lg p-4 text-center shadow-md"
-              >
-                <div className="w-16 h-16 bg-emerald-100 rounded-full mx-auto mb-3 flex items-center justify-center">
-                  <span className="text-emerald-600 font-bold text-xl">
-                    {volunteer.charAt(0)}
-                  </span>
-                </div>
-                <p className="text-sm font-medium text-gray-800">{volunteer}</p>
-                <p className="text-xs text-emerald-600 mt-1">
-                  {language === 'en' ? 'Volunteer' : 'স্বেচ্ছাসেবক'}
-                </p>
-              </motion.div>
-            ))}
+          {/* Decorative Background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-3xl transform -rotate-1 opacity-10" />
+          
+          <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-emerald-100">
+            
+            {/* Header with Icon */}
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <Users className="w-8 h-8 text-emerald-600" />
+              <h3 className="text-2xl font-bold text-emerald-800">
+                {language === 'en' ? 'Volunteers' : 'স্বেচ্ছাসেবক'}
+              </h3>
+            </div>
+
+            {/* Volunteers Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              {volunteers.map((volunteer, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  whileHover={{ scale: 1.05 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  className="text-center"
+                >
+                  <div className="relative mx-auto w-20 h-20 mb-3">
+                    <div className="absolute inset-0 bg-emerald-200 rounded-full animate-ping opacity-25" />
+                    <div className="relative w-full h-full bg-gradient-to-br from-emerald-400 to-teal-400 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg">
+                      {volunteer[language].charAt(0)}
+
+                    </div>
+                  </div>
+                  <p className="text-sm font-medium text-gray-700">{volunteer[language]}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>

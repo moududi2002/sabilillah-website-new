@@ -54,6 +54,7 @@ export default function Navbar() {
     { name: { en: 'Projects', bn: 'প্রকল্প' }, href: '/projects' },
     { name: { en: 'Team', bn: 'টিম' }, href: '/team' },
     { name: { en: 'Contact', bn: 'যোগাযোগ' }, href: '/contact' },
+    {name : {en: 'Eid 2026', bn: 'ঈদ ২০২৬'}, href: '/eid2026'}
   ]
 
   return (

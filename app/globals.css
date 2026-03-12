@@ -41,3 +41,36 @@
 [lang="bn"] {
   font-family: var(--font-bengali), sans-serif;
 }
+
+
+.input{
+width:100%;
+padding:14px;
+border-radius:12px;
+border:1px solid #e5e7eb;
+outline:none;
+}
+
+.amount-btn{
+padding:12px;
+border-radius:12px;
+background:#f3f4f6;
+font-weight:600;
+}
+
+.amount-btn.active{
+background:linear-gradient(to right,#059669,#14b8a6);
+color:white;
+}
+
+.pay-btn{
+padding:12px;
+border-radius:12px;
+background:#f3f4f6;
+font-weight:600;
+}
+
+.pay-btn.active{
+background:linear-gradient(to right,#059669,#14b8a6);
+color:white;
+}

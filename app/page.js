@@ -36,11 +36,14 @@ export default function Home() {
   return (
     <div className="overflow-hidden">
       <HeroSection language={language} />
-      <Statistics language={language} />
+       <EidTarget language={language} />
       <AboutSection language={language} />
+      
+
+       <Statistics language={language} />
       <RunningProjects language={language} />
       <SuccessStories language={language} />
-      <EidTarget language={language} />
+     
       <ManagementTeam language={language} />
       <DonationCTA language={language} />
     </div>
