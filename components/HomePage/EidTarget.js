@@ -146,7 +146,7 @@ export default function EidTarget({ language }) {
               {/* Buttons Container */}
               <div className="flex flex-col sm:flex-row gap-3">
                 {/* Learn More Button - Corrected Link */}
-                <Link href="/ramadan-pakage" className="flex-1">
+                <Link href="/ramadan-package" className="flex-1">
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}

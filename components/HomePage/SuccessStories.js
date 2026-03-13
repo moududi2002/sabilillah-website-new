@@ -10,7 +10,7 @@ export default function SuccessStories({ language }) {
       location: 'Rajbari',
       story: {
         en: 'The food package from Sabilillah Foundation helped my family celebrate Eid properly. We are forever grateful.',
-        bn: 'সাবিলিল্লাহ ফাউন্ডেশনের খাদ্য প্যাকেজ আমার পরিবারকে ঈদ properly উদযাপন করতে সাহায্য করেছে। আমরা চিরকৃতজ্ঞ।'
+        bn: 'সাবিলিল্লাহ ফাউন্ডেশনের খাদ্য প্যাকেজ আমার পরিবারকে ভালোভাবে ঈদ  উদযাপন করতে সাহায্য করেছে। আমরা চিরকৃতজ্ঞ।'
       }
     },
     {

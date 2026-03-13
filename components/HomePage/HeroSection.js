@@ -21,7 +21,7 @@ export default function HeroSection({ language }) {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       {/* Background with Islamic Pattern */}
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-emerald-900 to-emerald-700">
         <div className="absolute inset-0 opacity-10" style={{

@@ -215,7 +215,7 @@ export default function RunningProjects({ language }) {
 
                     {/* Action Button */}
                     <Link
-                      href="/ramadan-pakage"
+                      href="/ramadan-package"
                       className="w-full inline-flex items-center justify-center gap-2 bg-emerald-50 hover:bg-emerald-600 text-emerald-600 hover:text-white px-4 py-3 rounded-xl font-semibold transition-all duration-300 group/btn"
                     >
                       <span>{language === 'en' ? 'View Details' : 'বিস্তারিত'}</span>

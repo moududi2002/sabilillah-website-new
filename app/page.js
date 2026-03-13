@@ -34,7 +34,7 @@ export default function Home() {
   }
 
   return (
-    <div className="overflow-hidden">
+    <div className='overflow-hidden'>
       <HeroSection language={language} />
        <EidTarget language={language} />
       <AboutSection language={language} />

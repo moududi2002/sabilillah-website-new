@@ -28,6 +28,26 @@ export default function AboutSection({ language }) {
     }
   }
 
+const stats = {
+  years: {
+    number: { en: "5+", bn: "৫+" },
+    label: { en: "Years", bn: "বছরের অভিজ্ঞতা" }
+  },
+  projects: {
+    number: { en: "50+", bn: "৫০+" },
+    label: { en: "Projects", bn: "প্রকল্প" }
+  },
+  volunteers: {
+    number: { en: "50+", bn: "৫০+" },
+    label: { en: "Volunteers", bn: "স্বেচ্ছাসেবক" }
+  },
+  lives: {
+    number: { en: "10k+", bn: "১০ হাজার +" },
+    label: { en: "Lives", bn: "উপকৃত মানুষ" }
+  }
+}
+
+
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,22 +96,25 @@ export default function AboutSection({ language }) {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-4">
                 <div className="bg-emerald-100 rounded-2xl p-6 text-center">
-                  <div className="text-3xl font-bold text-emerald-700">5+</div>
-                  <div className="text-sm text-gray-600">Years</div>
+                  <div className="text-3xl font-bold text-emerald-700">{stats.years.number[language]}</div>
+                  <div className="text-sm text-gray-600">{stats.years.label[language]}</div>
                 </div>
+
                 <div className="bg-emerald-100 rounded-2xl p-6 text-center">
-                  <div className="text-3xl font-bold text-emerald-700">50+</div>
-                  <div className="text-sm text-gray-600">Projects</div>
+                  <div className="text-3xl font-bold text-emerald-700">{stats.projects.number[language]}</div>
+                  <div className="text-sm text-gray-600">{stats.projects.label[language]}</div>
                 </div>
               </div>
+
               <div className="space-y-4 mt-8">
                 <div className="bg-emerald-100 rounded-2xl p-6 text-center">
-                  <div className="text-3xl font-bold text-emerald-700">50+</div>
-                  <div className="text-sm text-gray-600">Volunteers</div>
+                  <div className="text-3xl font-bold text-emerald-700">{stats.volunteers.number[language]}</div>
+                  <div className="text-sm text-gray-600">{stats.volunteers.label[language]}</div>
                 </div>
+
                 <div className="bg-emerald-100 rounded-2xl p-6 text-center">
-                  <div className="text-3xl font-bold text-emerald-700">10k+</div>
-                  <div className="text-sm text-gray-600">Lives</div>
+                  <div className="text-3xl font-bold text-emerald-700">{stats.lives.number[language]}</div>
+                  <div className="text-sm text-gray-600">{stats.lives.label[language]}</div>
                 </div>
               </div>
             </div>
