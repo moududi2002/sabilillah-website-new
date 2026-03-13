@@ -68,7 +68,7 @@ export default function TeamPage() {
       name: { en: 'Anichur Rahman', bn: 'আনিছুর রহমান' },
       role: { en: 'Chairman', bn: 'চেয়ারম্যান' },
       unit: { en: 'Board of Directors', bn: 'পরিচালনা পর্ষদ' },
-      location: { en: 'Rajbari', bn: 'রাজবাড়ি' },
+      location: { en: 'Georgia, USA', bn: 'জর্জিয়া, যুক্তরাজ্য' },
       image: '/images/team/anichur.jpg',
       bio: {
         en: 'Leading the foundation with vision and dedication.',
@@ -126,7 +126,7 @@ export default function TeamPage() {
       name: { en: 'Airin Afroj Aishi', bn: 'আইরিন আফরোজ ঐশি' },
       role: { en: 'Deputy Director', bn: 'উপ-পরিচালক' },
       unit: { en: 'Director Unit', bn: 'ডিরেক্টর ইউনিট' },
-      location: { en: 'Rajbari', bn: 'রাজবাড়ি' },
+      location: { en: 'Georgia, USA', bn: 'জর্জিয়া, যুক্তরাজ্য' },
       image: '/images/team/airin.jpg',
       bio: {
         en: 'Coordinating programs and operations.',
@@ -155,7 +155,7 @@ export default function TeamPage() {
       name: { en: 'Abul Ala Mowdudi', bn: 'আবুল আলা মওদূদী' },
       role: { en: 'Operations Director', bn: 'নির্বাহী পরিচালক' },
       unit: { en: 'Operational Unit', bn: 'অপারেশনাল ইউনিট' },
-      location: { en: 'Rajbari', bn: 'রাজবাড়ি' },
+      location: { en: 'Joypurhat', bn: 'জয়পুরহাট' },
       image: '/images/team/moududi.jpeg',
       bio: {
         en: 'Managing field operations and activities.',
@@ -165,13 +165,13 @@ export default function TeamPage() {
         en: {
           title: 'Final Year Student',
           institution: 'Dept of Computer Science and Engineering, University of Dhaka',
-          country: 'Bangladesh',
+          country: 'Dhaka,Bangladesh',
           icon: GraduationCap
         },
         bn: {
           title: 'শেষ বর্ষের শিক্ষার্থী',
           institution: 'কম্পিউটার সায়েন্স এন্ড ইঞ্জিনিয়ারিং বিভাগ, ঢাকা বিশ্ববিদ্যালয়',
-          country: 'বাংলাদেশ',
+          country: 'ঢাকা,বাংলাদেশ',
           icon: GraduationCap
         }
       },
@@ -184,7 +184,7 @@ export default function TeamPage() {
       name: { en: 'Razaul Karim', bn: 'রেজাউল করিম' },
       role: { en: 'Assistant Operations Director', bn: 'সহকারী নির্বাহী পরিচালক' },
       unit: { en: 'Operational Unit', bn: 'অপারেশনাল ইউনিট' },
-      location: { en: 'Rajbari', bn: 'রাজবাড়ি' },
+      location: { en: 'Gazipur', bn: 'গাজীপুর' },
       image: '/images/team/razaul.jpg',
       bio: {
         en: 'Supporting operational and volunteer coordination.',
