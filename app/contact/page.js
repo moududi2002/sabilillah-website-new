@@ -118,7 +118,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Info Cards */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white pt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-6 -mt-20">
             {/* Address Card */}
@@ -270,15 +270,24 @@ export default function ContactPage() {
               viewport={{ once: true }}
               className="space-y-6"
             >
-              {/* Map */}
-              <div className="bg-white rounded-2xl shadow-xl p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">
-                  {content[language].map}
-                </h3>
-                <div className="h-64 bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
-                  <p className="text-gray-500">Google Maps Integration</p>
-                </div>
-              </div>
+                      {/* Map */}
+<div className="bg-white rounded-2xl shadow-xl p-6">
+  <h3 className="text-xl font-bold text-gray-800 mb-4">
+    {content[language].map}
+  </h3>
+
+  <div className="h-64 rounded-lg overflow-hidden">
+    <iframe
+      src="https://www.google.com/maps?q=Rajbari+Bangladesh&output=embed"
+      width="100%"
+      height="100%"
+      style={{ border: 0 }}
+      loading="lazy"
+      allowFullScreen
+      referrerPolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
+</div>
 
               {/* Social Links */}
               <div className="bg-white rounded-2xl shadow-xl p-6">

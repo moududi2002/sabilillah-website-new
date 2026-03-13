@@ -59,8 +59,8 @@ export default function ProjectsPage() {
       id: 1,
 
       title: {
-        en: 'Eid Food Package Distribution 2024',
-        bn: 'ঈদ খাদ্য প্যাকেজ বিতরণ ২০২৪'
+        en: 'Eid Food Package Distribution 2026',
+        bn: 'ঈদ খাদ্য প্যাকেজ বিতরণ ২০২৬'
       },
 
       description: {
@@ -74,8 +74,8 @@ export default function ProjectsPage() {
       },
 
       achieved: {
-        en: '75 Families',
-        bn: '৭৫ পরিবার'
+        en: '0 Families (Not started yet)',
+        bn: '০ পরিবার (আরম্ভ হয়নি)'
       },
 
       location: {
@@ -84,16 +84,16 @@ export default function ProjectsPage() {
       },
 
       startDate: {
-        en: 'March 2024',
-        bn: 'মার্চ ২০২৪'
+        en: 'March 2026',
+        bn: 'মার্চ ২০২৬'
       },
 
       endDate: {
-        en: 'April 2024',
-        bn: 'এপ্রিল ২০২৪'
+        en: 'April 2026',
+        bn: 'এপ্রিল ২০২৬'
       },
 
-      progress: 50,
+      progress: 0,
 
       items: {
         en: [
@@ -125,47 +125,6 @@ export default function ProjectsPage() {
 
     },
 
-    {
-      id: 2,
-
-      title: {
-        en: 'Winter Clothing Drive 2024',
-        bn: 'শীতবস্ত্র বিতরণ ২০২৪'
-      },
-
-      description: {
-        en: 'Providing winter clothes to 500 homeless people',
-        bn: '৫০০ গৃহহীন মানুষের মাঝে শীতবস্ত্র বিতরণ'
-      },
-
-      target: {
-        en: '500 People',
-        bn: '৫০০ জন'
-      },
-
-      achieved: {
-        en: '320 People',
-        bn: '৩২০ জন'
-      },
-
-      location: {
-        en: 'Kurigram, Nilphamari',
-        bn: 'কুড়িগ্রাম, নীলফামারী'
-      },
-
-      startDate: {
-        en: 'November 2024',
-        bn: 'নভেম্বর ২০২৪'
-      },
-
-      endDate: {
-        en: 'February 2025',
-        bn: 'ফেব্রুয়ারি ২০২৫'
-      },
-
-      progress: 64
-    }
-
   ]
 
 
@@ -175,8 +134,8 @@ export default function ProjectsPage() {
       id: 3,
 
       title: {
-        en: 'Eid Food Package Distribution 2023',
-        bn: 'ঈদ খাদ্য প্যাকেজ বিতরণ ২০২৩'
+        en: 'Eid Food Package Distribution 2025',
+        bn: 'ঈদ খাদ্য প্যাকেজ বিতরণ ২০২৫'
       },
 
       description: {
@@ -195,41 +154,13 @@ export default function ProjectsPage() {
       },
 
       duration: {
-        en: 'March 2023 - April 2023',
-        bn: 'মার্চ ২০২৩ - এপ্রিল ২০২৩'
+        en: 'March 2025 - April 2025',
+        bn: 'মার্চ ২০২৫ - এপ্রিল ২০২৫'
       }
 
     },
 
-    {
-      id: 4,
-
-      title: {
-        en: 'Winter Clothing Drive 2023',
-        bn: 'শীতবস্ত্র বিতরণ ২০২৩'
-      },
-
-      description: {
-        en: 'Distributed winter clothes to 450 people',
-        bn: '৪৫০ জনের মাঝে শীতবস্ত্র বিতরণ'
-      },
-
-      target: {
-        en: '450 People',
-        bn: '৪৫০ জন'
-      },
-
-      location: {
-        en: 'Rajbari, Faridpur',
-        bn: 'রাজবাড়ী, ফরিদপুর'
-      },
-
-      duration: {
-        en: 'December 2023 - January 2024',
-        bn: 'ডিসেম্বর ২০২৩ - জানুয়ারি ২০২৪'
-      }
-
-    }
+    
 
   ]
 
@@ -247,7 +178,7 @@ export default function ProjectsPage() {
 
       {/* HERO */}
 
-      <section className="py-20 bg-emerald-800 text-white text-center">
+      <section className=" px-4 py-20 bg-emerald-800 text-white text-center">
 
         <motion.h1
           initial={{opacity:0,y:20}}
